@@ -21,28 +21,11 @@ const createEmpleado = async (req, res) => {
 
 
 const getEmpleado = async (req, res) => {
-    
-    let limit = 10;
-    let offset = 0;
-    const data = await Empleados.findAndCountAll();
-    let page = req.params.page; 
-    let pages = Math.ceil(data.count / limit);
-    offset = limit * (page - 1);
-  
-    const previousPage = page - 1;
-    const nextPage = page + 1;
-  
     const empleados = await Empleados.findAll({
         include: [{ model: Sector }],
     });
   
-    res.status(200).json({
-        count: data.count,  
-        result: empleados,
-        pages: pages,
-        previousPage: previousPage,
-        nextPage: nextPage,
-      });
+    res.status(200).send({empleados});
 };
 
 const getEmpleadoById = async (req, res, next) => {

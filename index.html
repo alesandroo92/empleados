@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de empleados</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+	<!--Replace with your tailwind.css once created-->
+    <!--Regular Datatables CSS-->
+	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+	<!--Responsive Extension Datatables CSS-->
+	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
+
+    <!--Container-->
+	<div class="container w-full md:w-4/5 xl:w-3/5  mx-auto px-2">
+
+		<!--Title-->
+		<h1 class="flex items-center font-sans font-bold break-normal text-indigo-500 px-2 py-8 text-xl md:text-2xl">
+			Tabla de empleados 
+		</h1>
+
+
+		<!--Card-->
+		<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+
+
+			<table id="users" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+				<thead>
+					<tr>
+						<th data-priority="1">Id</th>
+						<th data-priority="2">Nombre</th>
+						<th data-priority="3">Apellido</th>
+						<th data-priority="4">IdSector</th>
+						<th data-priority="5">Sector.id</th>
+						<th data-priority="6">Sector.sector</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+
+			</table>
+
+
+		</div>
+		<!--/Card-->
+
+
+	</div>
+	<!--/container-->
+
+
+
+
+
+	<!-- jQuery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+	<!--Datatables -->
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+	<script>
+		$(document).ready(function() {
+
+            const url = "http://localhost:3000/empleados";
+
+			$('#users').DataTable({
+                ajax: {
+                    url: url,
+                    dataSrc: 'empleados' // Aca va el nombre de la tabla
+                },
+                columns: [
+                    {data: "id"},
+                    {data: "nombre"},
+                    {data: "apellido"},
+                    {data: "idSector"},
+                    {data: "Sector.id"},
+                    {data: "Sector.sector"},
+                ],
+                responsive: true
+					
+				})
+				.columns.adjust()
+				.responsive.recalc();
+		});
+	</script>
+    
+</body>
+</html>
